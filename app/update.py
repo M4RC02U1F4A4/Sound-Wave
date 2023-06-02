@@ -54,7 +54,7 @@ def update_album():
             if album['release_date_precision'] == 'year':
                 date = datetime.strptime(album['release_date'], '%Y')
             if first_time == 1:
-                viewed = 0
+                viewed = 1
             else:
                 viewed = 0
 
