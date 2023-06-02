@@ -1,0 +1,17 @@
+<script>
+    function httpGetAsync(theUrl, callback) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, true); 
+        xmlHttp.send(null);
+    }
+
+    function read(id) {
+        // console.log(id);
+
+        document.getElementById('div'+id).outerHTML = ""
+        document.getElementById('albumd_n1').innerHTML = Number(document.getElementById('albumd_n1').innerHTML) - 1
+        document.getElementById('albumd_n2').innerHTML = Number(document.getElementById('albumd_n2').innerHTML) - 1
+        
+        httpGetAsync("/read/"+id)
+    }
+</script>

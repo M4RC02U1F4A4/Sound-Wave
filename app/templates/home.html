@@ -1,0 +1,36 @@
+{% include "header.html" %}
+
+{% include "script.html" %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-2">
+            <div class="sticky-top">
+                {% include "sidebar.html" %}
+            </div>
+        </div>
+        <div class="col-xl-10">
+            <div class="row justify-content-center justify-content-xl-start">
+                {% for album in albums %}
+                <div class="col mt-5 album-card align-items-start" id="div{{ album['_id'] }}">
+                    <div class="row">
+                        <div class="position-relative text-center"> 
+                            <div class="image-container">
+                                <img src="{{ album['image'] }}" width="246" height="246" class="thumbnail-rad">
+                                <div class="overlay">
+                                    <div class="text-line">
+                                        <span class="fw-bold">{{ album['name'] }}</span><br><br><span class="fw-semibold">{{ artists[album['artist']] }}</span><br>{{ album['album_type'] }} - {{ album['release_date'] | beautify_time}}
+                                        <a class="stretched-link" id="{{ album['_id'] }}" onclick="read(this.id);return false;" target="#"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}

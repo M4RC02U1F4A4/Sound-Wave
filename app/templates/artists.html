@@ -1,0 +1,32 @@
+{% include "header.html" %}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-2">
+            <div class="sticky-top">
+                {% include "sidebar.html" %}
+            </div>
+        </div>
+        <div class="col-xl-10">
+            <div class="row justify-content-center justify-content-xl-start">
+                {% for artist in artists %}
+                <div class="col-xl-4 col-md-6 mt-5 position-relative">
+                    <div class="row">
+                        <div class="col-3">
+                            <img class="logoc-rad" src="{{ artist['image'] }}" width="103">
+                        </div> 
+                        <div class="col ms-4">
+                            <div class="artist-title fw-bold">{{ artist['name'] }}</div>
+                            <div class="mt-3">{{ artist['_id'] }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}

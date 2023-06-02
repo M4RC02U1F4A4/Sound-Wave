@@ -1,0 +1,112 @@
+<nav  class="navbar navbar-dark bg-dark">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <img class="me-4" src="{{ url_for('static', filename='media/favicon.png') }}" width="40px">
+      <span class="fs-4">Sound Wave</span>
+    </a>
+    <button class="navbar-toggler d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+
+<div class="collapse"  id="collapseMenu">
+  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-pills text-white">
+    <hr>
+    <li class="nav-item">
+      <span class="text-center nav-link">{{ last_update }}</span>
+    </li>
+    <hr>
+    <li class="nav-item">
+      {% if active == 'home' %}
+      <a href="/" class="nav-link active" aria-current="page">
+      {% else %}
+      <a href="/" class="nav-link text-white" aria-current="page">
+      {% endif %}
+        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+        Home (<span id="albumd_n1">{{ n_albums }}</span>)
+      </a>
+    </li>
+    <hr>
+    <li class="nav-item">
+      {% if active == 'artists' %}
+      <a href="/artists" class="nav-link active" aria-current="page">
+      {% else %}
+      <a href="/artists" class="nav-link text-white" aria-current="page">
+      {% endif %}
+        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+        Artists ({{ n_artists }})
+      </a>
+    </li>
+    <li class="nav-item">
+      {% if active == 'albums' %}
+      <a href="/albums" class="nav-link active" aria-current="page">
+      {% else %}
+      <a href="/albums" class="nav-link text-white" aria-current="page">
+      {% endif %}
+        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+        Albums ({{ all_n_albums }})
+      </a>
+    </li>
+    <hr>
+    <li class="nav-item">
+      {% if active == 'manage' %}
+      <a href="/manage" class="nav-link active" aria-current="page">
+      {% else %}
+      <a href="/manage" class="nav-link text-white" aria-current="page">
+      {% endif %}
+        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+        Manage
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+<ul class="navbar-nav justify-content-end flex-grow-1 pe-3 nav-pills text-white d-none d-xl-block">
+  <hr>
+  <li class="nav-item">
+    <span class="text-center nav-link">{{ last_update }}</span>
+  </li>
+  <hr>
+  <li class="nav-item">
+    {% if active == 'home' %}
+    <a href="/" class="nav-link active" aria-current="page">
+    {% else %}
+    <a href="/" class="nav-link text-white" aria-current="page">
+    {% endif %}
+      <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+      Home (<span id="albumd_n2">{{ n_albums }}</span>)
+    </a>
+  </li>
+  <hr>
+  <li class="nav-item">
+    {% if active == 'artists' %}
+    <a href="/artists" class="nav-link active" aria-current="page">
+    {% else %}
+    <a href="/artists" class="nav-link text-white" aria-current="page">
+    {% endif %}
+      <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+      Artists ({{ n_artists }})
+    </a>
+  </li>
+  <li class="nav-item">
+    {% if active == 'albums' %}
+    <a href="/albums" class="nav-link active" aria-current="page">
+    {% else %}
+    <a href="/albums" class="nav-link text-white" aria-current="page">
+    {% endif %}
+      <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+      Albums ({{ all_n_albums }})
+    </a>
+  </li>
+  <hr>
+  <li class="nav-item">
+    {% if active == 'manage' %}
+    <a href="/manage" class="nav-link active" aria-current="page">
+    {% else %}
+    <a href="/manage" class="nav-link text-white" aria-current="page">
+    {% endif %}
+      <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+      Manage
+    </a>
+  </li>
+</ul>
