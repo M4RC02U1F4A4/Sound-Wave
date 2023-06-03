@@ -36,42 +36,43 @@ def update_album():
             album = requests.get(link, headers=auth).json()
             if album['items']:
                 albums.append(album['items'][0]['id'])
-                print(album['items'][0]['id'])
             if album['next']:
                 link = album['next']
-                print(link)
             else:
                 break
+        print(f"{ar['_id']} -> {len(albums)}")
 
         for aid in albums:
-            print(aid)
-            album = requests.get(f"https://api.spotify.com/v1/albums/{aid}", headers=auth).json()
+            mydict = albumsDB.find_one({"_id":f"{aid}"})
+            if not mydict:
+                print(aid)
+                album = requests.get(f"https://api.spotify.com/v1/albums/{aid}", headers=auth).json()
 
-            if album['release_date_precision'] == 'day':
-                date = datetime.strptime(album['release_date'], '%Y-%m-%d')
-            if album['release_date_precision'] == 'month':
-                date = datetime.strptime(album['release_date'], '%Y-%m')
-            if album['release_date_precision'] == 'year':
-                date = datetime.strptime(album['release_date'], '%Y')
-            if first_time == 1:
-                viewed = 1
-            else:
-                viewed = 0
+                if album['release_date_precision'] == 'day':
+                    date = datetime.strptime(album['release_date'], '%Y-%m-%d')
+                if album['release_date_precision'] == 'month':
+                    date = datetime.strptime(album['release_date'], '%Y-%m')
+                if album['release_date_precision'] == 'year':
+                    date = datetime.strptime(album['release_date'], '%Y')
+                if first_time == 1:
+                    viewed = 1
+                else:
+                    viewed = 0
 
-            try:
-                albumsDB.insert_one({
-                    "_id": f"{album['id']}",
-                    "artist": f"{ar['_id']}",
-                    "total_tracks": album['total_tracks'],
-                    "album_type": f"{album['album_type']}",
-                    "image": f"{album['images'][0]['url']}",
-                    "name": f"{album['name']}",
-                    "release_date": date,
-                    "label": f"{album['label']}",
-                    "viewed": viewed
-                })
-            except:
-                pass
+                try:
+                    albumsDB.insert_one({
+                        "_id": f"{album['id']}",
+                        "artist": f"{ar['_id']}",
+                        "total_tracks": album['total_tracks'],
+                        "album_type": f"{album['album_type']}",
+                        "image": f"{album['images'][0]['url']}",
+                        "name": f"{album['name']}",
+                        "release_date": date,
+                        "label": f"{album['label']}",
+                        "viewed": viewed
+                    })
+                except:
+                    pass
     try:
         randomDB.insert_one({"_id":"last_update", "time":f"{datetime.now().strftime('%d/%m/%y %H:%M')}"})
     except:
