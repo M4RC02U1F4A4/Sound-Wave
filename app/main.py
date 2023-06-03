@@ -113,7 +113,26 @@ def add_id(id):
     except:
         pass
 
-    return redirect("/")
+    return redirect("/manage")
+
+@app.route('/addbyid', methods = ['POST'])
+def add_by_id():
+    id = request.form['id']
+    result = requests.get(f"https://api.spotify.com/v1/artists/{id}", headers=api_auth()).json()
+    print(result)
+    if not 'error' in str(result):
+        data = {
+            "_id":f"{result['id']}",
+            "name":f"{result['name']}",
+            "genres": result['genres'],
+            "image":f"{result['images'][0]['url']}"
+        }
+        try:
+            artistsDB.insert_one(data)
+        except:
+            pass
+
+    return redirect("/manage")
 
 @app.route('/read/<id>')
 def read(id):
